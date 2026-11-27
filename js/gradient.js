@@ -26,7 +26,7 @@
   /* Build node colours (gh x gw x 3) from the weights and the 4 user colours. */
   function nodeColors(field, colors) {
     var W = B.FIELDS[field];
-    var rgb = colors.map(hexToRgb).concat([[255, 255, 255]]);
+    var rgb = colors.map(hexToRgb); if (rgb.length < 5) rgb.push([255, 255, 255]);
     var gh = W[0].length, gw = W[0][0].length;
     var out = new Float32Array(gh * gw * 3);
     for (var y = 0; y < gh; y++) {

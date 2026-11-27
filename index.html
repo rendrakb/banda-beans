@@ -16,13 +16,16 @@
   <!-- ============ FORM ============ -->
   <section class="panel form" id="form">
     <h2>Bean</h2>
-    <label>Bean name <input id="name" type="text" placeholder="Lollipop Candy"></label>
+    <label>Bean name <span class="hint">Enter = line break</span><textarea id="name" rows="2" placeholder="Lollipop Candy"></textarea></label>
     <label>Roastery <input id="roastery" type="text" placeholder="Koeslan Roastery"></label>
 
     <h2>Origin</h2>
-    <p class="hint">Each row shows as “45%  Origin Process”.</p>
+    <p class="hint">Percent is optional. Text before the first comma is set in italic (area), the rest regular — e.g. “Bengkolan Dua, Kerinci”. A per-row process is optional too; use the Process field below for a separate Process block.</p>
     <div id="origins"></div>
     <button type="button" class="ghost" id="addOrigin">+ Add origin</button>
+
+    <h2>Process</h2>
+    <label>Process <span class="hint">shown below Origin</span><input id="process" type="text" placeholder="Lactic Natural"></label>
 
     <h2>Notes</h2>
     <label>Black <span class="hint">comma separated</span>
@@ -30,14 +33,28 @@
     <label>White <span class="hint">comma separated</span>
       <textarea id="notesWhite" rows="2"></textarea></label>
 
-    <h2>Gradient colours</h2>
-    <p class="hint">Positions as seen on the card. The swirl, white centre and rotation per format are automatic.</p>
+    <h2>Gradient</h2>
+    <div class="seg">
+      <label><input type="radio" name="gradient" value="light"><span>Light · white swirl</span></label>
+      <label><input type="radio" name="gradient" value="full"><span>Full · no white</span></label>
+    </div>
+    <p class="hint">Colours as seen on the card (top / right / bottom / left). Rotation per format is automatic.</p>
     <div class="colors">
       <label>Top <input type="color" id="c0"></label>
       <label>Right <input type="color" id="c1"></label>
       <label>Bottom <input type="color" id="c2"></label>
       <label>Left <input type="color" id="c3"></label>
       <button type="button" class="ghost" id="resetColors">Reset</button>
+    </div>
+    <div id="fullOpts">
+      <label class="inline"><input type="checkbox" id="fillAuto"> Blend colour in the middle &amp; corners: automatic</label>
+      <label>Blend colour <input type="color" id="fill"></label>
+    </div>
+    <div class="row">
+      <label>Text on gradient
+        <select id="textColor"><option value="auto">Auto (light/dark)</option><option value="black">Black</option><option value="white">White</option></select></label>
+      <label>Layout
+        <select id="layout"><option value="new">Compact (new)</option><option value="classic">Classic (Lollipop)</option></select></label>
     </div>
 
     <h2>Line up (donut)</h2>
@@ -59,9 +76,13 @@
       </div>
       <p class="hint">Default matches your Illustrator file: 10 × 14 circles of 2 cm, flush to the top-left of the A4.</p>
     </details>
-    <button type="button" class="primary" id="downloadAll">Download all 4 (ZIP)</button>
+    <button type="button" class="primary" id="downloadAll">Download all (PNG + SVG, ZIP)</button>
 
-    <h2>Library</h2>
+    <h2>Examples &amp; library</h2>
+    <div class="row">
+      <button type="button" class="ghost" id="exAbdul">Abdul (full gradient)</button>
+      <button type="button" class="ghost" id="exLollipop">Lollipop (light)</button>
+    </div>
     <p class="hint">Saved in this browser only. Use Export to keep a backup or move to another computer.</p>
     <div class="row">
       <button type="button" class="ghost" id="saveBean">Save this bean</button>
@@ -77,20 +98,23 @@
   <!-- ============ PREVIEWS ============ -->
   <section class="previews" id="previews">
     <figure data-format="card"><div class="stage"><canvas></canvas></div>
-      <figcaption><span>Card · 5 × 7 cm</span><button type="button" class="dl">PNG</button></figcaption></figure>
+      <figcaption><span>Card · 5 × 7 cm</span><span class="btns"><button type="button" class="dl" data-type="png">PNG</button><button type="button" class="dl" data-type="svg">SVG</button></span></figcaption></figure>
     <figure data-format="sticker"><div class="stage"><canvas></canvas></div>
-      <figcaption><span>Sticker · 7 × 10 cm</span><button type="button" class="dl">PNG</button></figcaption></figure>
+      <figcaption><span>Sticker · 7 × 10 cm</span><span class="btns"><button type="button" class="dl" data-type="png">PNG</button><button type="button" class="dl" data-type="svg">SVG</button></span></figcaption></figure>
     <figure data-format="donut" class="wide"><div class="stage"><canvas></canvas></div>
-      <figcaption><span>Donut · 10 × 5 cm</span><button type="button" class="dl">PNG</button></figcaption></figure>
+      <figcaption><span>Donut · 10 × 5 cm</span><span class="btns"><button type="button" class="dl" data-type="png">PNG</button><button type="button" class="dl" data-type="svg">SVG</button></span></figcaption></figure>
     <figure data-format="tube" class="tall"><div class="stage"><canvas></canvas></div>
-      <figcaption><span>Tube · A4 sheet, 10 × 14 circles of 2 cm</span><button type="button" class="dl">PNG</button></figcaption></figure>
+      <figcaption><span>Tube · A4 sheet, 10 × 14 circles of 2 cm</span><span class="btns"><button type="button" class="dl" data-type="png">PNG</button><button type="button" class="dl" data-type="svg">SVG</button></span></figcaption></figure>
   </section>
 </main>
 <div id="toast" role="status"></div>
 
 <script src="js/vendor/jszip.min.js"></script>
+<script src="js/vendor/opentype.min.js"></script>
 <script src="js/data.js"></script>
+<script src="js/fonts-data.js"></script>
 <script src="js/gradient.js"></script>
+<script src="js/svg.js"></script>
 <script src="js/render.js"></script>
 <script src="js/png.js"></script>
 <script src="js/app.js"></script>

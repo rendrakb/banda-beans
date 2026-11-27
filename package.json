@@ -1,0 +1,7 @@
+{
+  "name": "beans-card-generator",
+  "private": true,
+  "description": "Static site that generates coffee bean cards, stickers, tube sheets and donuts.",
+  "scripts": { "test": "node test/render-test.js" },
+  "devDependencies": { "canvas": "^3.0.0" }
+}

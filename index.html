@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beans Card Generator</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="top">
+  <h1>Beans Card Generator</h1>
+  <p>Fill in the bean once — get the card, sticker, tube sheet and donut, print-ready.</p>
+</header>
+
+<main class="layout">
+  <!-- ============ FORM ============ -->
+  <section class="panel form" id="form">
+    <h2>Bean</h2>
+    <label>Bean name <input id="name" type="text" placeholder="Lollipop Candy"></label>
+    <label>Roastery <input id="roastery" type="text" placeholder="Koeslan Roastery"></label>
+
+    <h2>Origin</h2>
+    <p class="hint">Each row shows as “45%  Origin Process”.</p>
+    <div id="origins"></div>
+    <button type="button" class="ghost" id="addOrigin">+ Add origin</button>
+
+    <h2>Notes</h2>
+    <label>Black <span class="hint">comma separated</span>
+      <textarea id="notesBlack" rows="2"></textarea></label>
+    <label>White <span class="hint">comma separated</span>
+      <textarea id="notesWhite" rows="2"></textarea></label>
+
+    <h2>Gradient colours</h2>
+    <p class="hint">Positions as seen on the card. The swirl, white centre and rotation per format are automatic.</p>
+    <div class="colors">
+      <label>Top <input type="color" id="c0"></label>
+      <label>Right <input type="color" id="c1"></label>
+      <label>Bottom <input type="color" id="c2"></label>
+      <label>Left <input type="color" id="c3"></label>
+      <button type="button" class="ghost" id="resetColors">Reset</button>
+    </div>
+
+    <h2>Line up (donut)</h2>
+    <div id="months" class="chips"></div>
+    <label>Label <input id="lineUp" type="text" value="Line Up"></label>
+
+    <h2>Export</h2>
+    <div class="row">
+      <label>Resolution
+        <select id="dpi"><option value="150">150 dpi</option><option value="300" selected>300 dpi (print)</option><option value="600">600 dpi</option></select>
+      </label>
+    </div>
+    <details>
+      <summary>Tube sheet placement</summary>
+      <div class="row">
+        <label>Offset X (mm) <input type="number" id="tubeX" value="0" step="0.5"></label>
+        <label>Offset Y (mm) <input type="number" id="tubeY" value="0" step="0.5"></label>
+        <label>Gap (mm) <input type="number" id="tubeGap" value="0" step="0.5" min="0"></label>
+      </div>
+      <p class="hint">Default matches your Illustrator file: 10 × 14 circles of 2 cm, flush to the top-left of the A4.</p>
+    </details>
+    <button type="button" class="primary" id="downloadAll">Download all 4 (ZIP)</button>
+
+    <h2>Library</h2>
+    <p class="hint">Saved in this browser only. Use Export to keep a backup or move to another computer.</p>
+    <div class="row">
+      <button type="button" class="ghost" id="saveBean">Save this bean</button>
+      <button type="button" class="ghost" id="newBean">New</button>
+    </div>
+    <ul id="library" class="library"></ul>
+    <div class="row">
+      <button type="button" class="ghost" id="exportLib">Export JSON</button>
+      <label class="ghost filebtn">Import JSON <input type="file" id="importLib" accept="application/json"></label>
+    </div>
+  </section>
+
+  <!-- ============ PREVIEWS ============ -->
+  <section class="previews" id="previews">
+    <figure data-format="card"><div class="stage"><canvas></canvas></div>
+      <figcaption><span>Card · 5 × 7 cm</span><button type="button" class="dl">PNG</button></figcaption></figure>
+    <figure data-format="sticker"><div class="stage"><canvas></canvas></div>
+      <figcaption><span>Sticker · 7 × 10 cm</span><button type="button" class="dl">PNG</button></figcaption></figure>
+    <figure data-format="donut" class="wide"><div class="stage"><canvas></canvas></div>
+      <figcaption><span>Donut · 10 × 5 cm</span><button type="button" class="dl">PNG</button></figcaption></figure>
+    <figure data-format="tube" class="tall"><div class="stage"><canvas></canvas></div>
+      <figcaption><span>Tube · A4 sheet, 10 × 14 circles of 2 cm</span><button type="button" class="dl">PNG</button></figcaption></figure>
+  </section>
+</main>
+<div id="toast" role="status"></div>
+
+<script src="js/vendor/jszip.min.js"></script>
+<script src="js/data.js"></script>
+<script src="js/gradient.js"></script>
+<script src="js/render.js"></script>
+<script src="js/png.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

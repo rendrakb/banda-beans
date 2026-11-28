@@ -1,6 +1,6 @@
 const { createCanvas, registerFont } = require('canvas'); const fs = require('fs'), path = require('path');
 const root = path.join(__dirname, '..'); const F = (n) => path.join(root, 'assets/fonts', n);
-[['Light',300,'normal'],['Regular',400,'normal'],['Italic',400,'italic'],['Bold',700,'normal'],['BoldItalic',700,'italic']].forEach(([f,w,s]) => registerFont(F(`NeueMontreal-${f}.otf`), {family:'Neue Montreal',weight:String(w),style:s}));
+[['font-light.otf',300,'normal'],['font-light-italic.otf',300,'italic'],['font-regular.otf',400,'normal'],['font-italic.otf',400,'italic'],['font-medium.otf',500,'normal'],['font-mediumitalic.otf',500,'italic'],['font-bold.otf',700,'normal'],['font-bolditalic.otf',700,'italic']].forEach(([file,w,s]) => registerFont(F(file), {family:'Neue Montreal',weight:String(w),style:s}));
 registerFont(F('DMMono-Light.ttf'), {family:'DM Mono',weight:'300'});
 require(root+'/js/data.js'); require(root+'/js/gradient.js'); const B = require(root+'/js/render.js'); B.canvasFactory=(w,h)=>createCanvas(w,h);
 const d = { name:'Washed Ethiopian Guji Hambela Reserve', roastery:'Some Very Long Roastery Name Co.', colors:['#ff5a00','#7a2cff','#00c2a8','#ffd400'],
